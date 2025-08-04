@@ -1,7 +1,7 @@
 # Jekyll configuration for Brand Guidelines Site
 title: "Brand Guidelines"
 description: "Comprehensive brand guidelines and visual identity documentation"
-baseurl: ""
+baseurl: "/brand-guidelines-site"
 url: "https://ben104.github.io"
 
 # Jekyll settings

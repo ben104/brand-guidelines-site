@@ -29,7 +29,7 @@ quick_access:
   - title: Color Codes
     url: /visual-identity/colors/#color-codes
     description: Hex, RGB, and CMYK values
-    preview: {% include color-palette.html %}
+    preview: "Color swatches and codes"
   - title: Font Downloads
     url: /assets/downloads/
     description: Typography files and specimens
