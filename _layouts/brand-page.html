@@ -1,0 +1,96 @@
+---
+layout: default
+---
+
+<article class="brand-page">
+  <div class="container">
+    <!-- Page content -->
+    <div class="brand-content">
+      {{ content }}
+    </div>
+    
+    <!-- Sidebar with page navigation -->
+    {% if page.sidebar_nav %}
+      <aside class="page-sidebar">
+        <nav class="page-nav" aria-label="Page sections">
+          <h3>On this page</h3>
+          <ul>
+            {% for item in page.sidebar_nav %}
+              <li><a href="#{{ item.id }}">{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </aside>
+    {% endif %}
+    
+    <!-- Related content -->
+    {% if page.related_pages %}
+      <section class="related-content">
+        <h2>Related Guidelines</h2>
+        <div class="related-grid">
+          {% for related in page.related_pages %}
+            <div class="related-card">
+              <h3><a href="{{ related.url | relative_url }}">{{ related.title }}</a></h3>
+              <p>{{ related.description }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+    <!-- Downloads section if specified -->
+    {% if page.downloads %}
+      <section class="downloads-section">
+        <h2>Downloads</h2>
+        <div class="download-grid">
+          {% for download in page.downloads %}
+            <div class="download-item">
+              <div class="download-icon">
+                <span class="file-type">{{ download.type | upcase }}</span>
+              </div>
+              <div class="download-info">
+                <h3>{{ download.title }}</h3>
+                <p>{{ download.description }}</p>
+                <a href="{{ download.url | relative_url }}" class="download-btn" download>
+                  Download {{ download.type | upcase }}
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+    <!-- Page navigation -->
+    <nav class="page-navigation" aria-label="Page navigation">
+      {% assign current_index = 0 %}
+      {% assign pages_in_section = site.pages | where: "section", page.section | sort: "order" %}
+      
+      {% for p in pages_in_section %}
+        {% if p.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      
+      <div class="nav-links">
+        {% if current_index > 0 %}
+          {% assign prev_page = pages_in_section[current_index - 1] %}
+          <a href="{{ prev_page.url | relative_url }}" class="nav-link nav-prev">
+            <span class="nav-direction">← Previous</span>
+            <span class="nav-title">{{ prev_page.title }}</span>
+          </a>
+        {% endif %}
+        
+        {% assign next_index = current_index | plus: 1 %}
+        {% if next_index < pages_in_section.size %}
+          {% assign next_page = pages_in_section[next_index] %}
+          <a href="{{ next_page.url | relative_url }}" class="nav-link nav-next">
+            <span class="nav-direction">Next →</span>
+            <span class="nav-title">{{ next_page.title }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</article>

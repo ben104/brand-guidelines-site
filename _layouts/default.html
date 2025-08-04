@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+  
+  <!-- Font imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{ site.data.typography.primary_font.web_font }}" rel="stylesheet">
+  <link href="{{ site.data.typography.secondary_font.web_font }}" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  
+  <!-- Open Graph meta tags -->
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+  <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Jekyll SEO Tag -->
+  {% seo %}
+</head>
+<body class="{% if page.body_class %}{{ page.body_class }}{% endif %}">
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    {% include navigation.html %}
+  </header>
+  
+  <!-- Main content -->
+  <main id="main-content" class="main-content" role="main">
+    {% if page.title and page.layout != 'homepage' %}
+      <div class="page-header">
+        <div class="container">
+          {% include breadcrumbs.html %}
+          <h1 class="page-title">{{ page.title }}</h1>
+          {% if page.description %}
+            <p class="page-description">{{ page.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="content-wrapper">
+      <div class="content-layout">
+        <!-- Sidebar Navigation -->
+        {% unless page.hide_sidebar %}
+          {% include sidebar-navigation.html %}
+        {% endunless %}
+        
+        <!-- Main Content Area -->
+        <div class="main-content-area">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>{{ site.title }}</h3>
+          <p>{{ site.description }}</p>
+        </div>
+        
+        {% for section in site.data.navigation.footer_navigation %}
+          <div class="footer-section">
+            <h4>{{ section.title }}</h4>
+            <ul class="footer-links">
+              {% for link in section.links %}
+                <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. All rights reserved.</p>
+        <p class="last-updated">Last updated: {{ site.time | date: "%B %d, %Y" }}</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

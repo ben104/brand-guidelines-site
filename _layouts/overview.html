@@ -1,0 +1,118 @@
+---
+layout: default
+---
+
+<div class="overview-page">
+  <div class="container">
+    <!-- Overview introduction -->
+    <div class="overview-intro">
+      {{ content }}
+    </div>
+    
+    <!-- Section cards grid -->
+    {% if page.section_cards %}
+      <section class="section-grid">
+        <h2>Browse Guidelines</h2>
+        <div class="cards-grid">
+          {% for card in page.section_cards %}
+            <article class="section-card">
+              {% if card.icon %}
+                <div class="card-icon">
+                  <img src="{{ card.icon | relative_url }}" alt="{{ card.title }} icon" />
+                </div>
+              {% endif %}
+              
+              <div class="card-content">
+                <h3><a href="{{ card.url | relative_url }}">{{ card.title }}</a></h3>
+                <p>{{ card.description }}</p>
+                
+                {% if card.highlights %}
+                  <ul class="card-highlights">
+                    {% for highlight in card.highlights %}
+                      <li>{{ highlight }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                
+                <a href="{{ card.url | relative_url }}" class="card-link">
+                  Explore {{ card.title }} →
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+    <!-- Quick access section -->
+    {% if page.quick_access %}
+      <section class="quick-access">
+        <h2>Quick Access</h2>
+        <div class="quick-access-grid">
+          {% for item in page.quick_access %}
+            <div class="quick-access-item">
+              <h3><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+              <p>{{ item.description }}</p>
+              {% if item.preview %}
+                <div class="quick-preview">
+                  {{ item.preview }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+    <!-- Featured content -->
+    {% if page.featured %}
+      <section class="featured-content">
+        <h2>Featured</h2>
+        <div class="featured-grid">
+          {% for feature in page.featured %}
+            <div class="featured-item">
+              {% if feature.image %}
+                <div class="featured-image">
+                  <img src="{{ feature.image | relative_url }}" alt="{{ feature.title }}" />
+                </div>
+              {% endif %}
+              
+              <div class="featured-content">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+                
+                {% if feature.actions %}
+                  <div class="featured-actions">
+                    {% for action in feature.actions %}
+                      <a href="{{ action.url | relative_url }}" class="btn {% if action.primary %}btn-primary{% else %}btn-secondary{% endif %}">
+                        {{ action.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+    <!-- Section statistics or metrics -->
+    {% if page.stats %}
+      <section class="overview-stats">
+        <h2>At a Glance</h2>
+        <div class="stats-grid">
+          {% for stat in page.stats %}
+            <div class="stat-item">
+              <div class="stat-number">{{ stat.number }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+              {% if stat.description %}
+                <div class="stat-description">{{ stat.description }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</div>

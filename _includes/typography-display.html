@@ -1,0 +1,68 @@
+<!-- Typography Display Component -->
+<section class="typography-display">
+  <h3>Typography Showcase</h3>
+  
+  <!-- Font Families -->
+  <div class="font-families">
+    <div class="font-family primary-font">
+      <h4>{{ site.data.typography.primary_font.name }} ({{ site.data.typography.primary_font.type }})</h4>
+      <p class="font-usage">{{ site.data.typography.primary_font.usage }}</p>
+      
+      <div class="font-weights">
+        {% for weight in site.data.typography.primary_font.weights %}
+          <div class="weight-example" style="font-family: '{{ site.data.typography.primary_font.name }}', {{ site.data.typography.primary_font.fallback }}; font-weight: {{ weight }};">
+            <span class="weight-label">{{ weight }}</span>
+            <span class="sample-text">The quick brown fox jumps over the lazy dog</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="font-family secondary-font">
+      <h4>{{ site.data.typography.secondary_font.name }} ({{ site.data.typography.secondary_font.type }})</h4>
+      <p class="font-usage">{{ site.data.typography.secondary_font.usage }}</p>
+      
+      <div class="font-weights">
+        {% for weight in site.data.typography.secondary_font.weights %}
+          <div class="weight-example" style="font-family: '{{ site.data.typography.secondary_font.name }}', {{ site.data.typography.secondary_font.fallback }}; font-weight: {{ weight }};">
+            <span class="weight-label">{{ weight }}</span>
+            <span class="sample-text">The quick brown fox jumps over the lazy dog</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Typography Scale -->
+  <div class="typography-scale">
+    <h4>Typography Scale</h4>
+    {% for size in site.data.typography.font_sizes %}
+      <div class="size-example">
+        <span class="size-label">{{ size[0] | upcase }} ({{ size[1] }})</span>
+        <{% if size[0] contains 'h' %}{{ size[0] }}{% else %}p{% endif %} 
+         style="font-size: {{ size[1] }}; margin: 0.5rem 0; line-height: {{ site.data.typography.line_heights.heading }};">
+          Sample {{ size[0] | upcase }} Text
+        </{% if size[0] contains 'h' %}{{ size[0] }}{% else %}p{% endif %}>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <!-- Text Samples -->
+  <div class="text-samples">
+    <h4>Text Samples</h4>
+    
+    <div class="sample-block">
+      <h5>Heading Sample</h5>
+      <h2 style="font-family: '{{ site.data.typography.primary_font.name }}', {{ site.data.typography.primary_font.fallback }};">
+        Brand Guidelines Documentation
+      </h2>
+    </div>
+    
+    <div class="sample-block">
+      <h5>Body Text Sample</h5>
+      <p style="font-family: '{{ site.data.typography.secondary_font.name }}', {{ site.data.typography.secondary_font.fallback }}; line-height: {{ site.data.typography.line_heights.body }};">
+        This is a sample of body text using our secondary font. It demonstrates how longer passages of text will appear across our brand materials. The typography should be highly readable and maintain consistent spacing and rhythm throughout.
+      </p>
+    </div>
+  </div>
+</section>

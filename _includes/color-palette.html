@@ -1,0 +1,74 @@
+<!-- Reusable Color Palette Display Component -->
+<section class="color-palette">
+  <h3>Color Palette</h3>
+  
+  <div class="color-grid">
+    <!-- Primary Color -->
+    <div class="color-swatch primary-color">
+      <div class="color-preview" style="background-color: {{ site.data.colors.primary.hex }};"></div>
+      <div class="color-info">
+        <h4>{{ site.data.colors.primary.name }}</h4>
+        <div class="color-codes">
+          <span class="hex">{{ site.data.colors.primary.hex }}</span>
+          <span class="rgb">RGB: {{ site.data.colors.primary.rgb }}</span>
+          <span class="cmyk">CMYK: {{ site.data.colors.primary.cmyk }}</span>
+          {% if site.data.colors.primary.pantone %}
+            <span class="pantone">{{ site.data.colors.primary.pantone }}</span>
+          {% endif %}
+        </div>
+        <p class="usage">{{ site.data.colors.primary.usage }}</p>
+      </div>
+    </div>
+    
+    <!-- Secondary Color -->
+    <div class="color-swatch secondary-color">
+      <div class="color-preview" style="background-color: {{ site.data.colors.secondary.hex }};"></div>
+      <div class="color-info">
+        <h4>{{ site.data.colors.secondary.name }}</h4>
+        <div class="color-codes">
+          <span class="hex">{{ site.data.colors.secondary.hex }}</span>
+          <span class="rgb">RGB: {{ site.data.colors.secondary.rgb }}</span>
+          <span class="cmyk">CMYK: {{ site.data.colors.secondary.cmyk }}</span>
+          {% if site.data.colors.secondary.pantone %}
+            <span class="pantone">{{ site.data.colors.secondary.pantone }}</span>
+          {% endif %}
+        </div>
+        <p class="usage">{{ site.data.colors.secondary.usage }}</p>
+      </div>
+    </div>
+    
+    <!-- Accent Color -->
+    <div class="color-swatch accent-color">
+      <div class="color-preview" style="background-color: {{ site.data.colors.accent.hex }};"></div>
+      <div class="color-info">
+        <h4>{{ site.data.colors.accent.name }}</h4>
+        <div class="color-codes">
+          <span class="hex">{{ site.data.colors.accent.hex }}</span>
+          <span class="rgb">RGB: {{ site.data.colors.accent.rgb }}</span>
+          <span class="cmyk">CMYK: {{ site.data.colors.accent.cmyk }}</span>
+          {% if site.data.colors.accent.pantone %}
+            <span class="pantone">{{ site.data.colors.accent.pantone }}</span>
+          {% endif %}
+        </div>
+        <p class="usage">{{ site.data.colors.accent.usage }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Neutral Colors -->
+  <div class="neutral-colors">
+    <h4>Neutral Colors</h4>
+    <div class="neutral-grid">
+      {% for neutral in site.data.colors.neutrals %}
+        <div class="neutral-swatch">
+          <div class="color-preview" style="background-color: {{ neutral[1].hex }};"></div>
+          <div class="color-info">
+            <span class="name">{{ neutral[1].name }}</span>
+            <span class="hex">{{ neutral[1].hex }}</span>
+            <span class="usage">{{ neutral[1].usage }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

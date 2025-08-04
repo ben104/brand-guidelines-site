@@ -1,0 +1,44 @@
+<!-- Breadcrumb Navigation -->
+{% unless page.url == "/" %}
+<nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="{{ '/' | relative_url }}" class="breadcrumb-link">Home</a>
+    </li>
+    
+    {% assign url_parts = page.url | split: '/' %}
+    {% assign breadcrumb_url = '' %}
+    
+    {% for part in url_parts %}
+      {% unless part == '' %}
+        {% assign breadcrumb_url = breadcrumb_url | append: '/' | append: part %}
+        
+        {% if forloop.last %}
+          <!-- Current page - no link -->
+          <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+            <span class="breadcrumb-text">{{ page.title }}</span>
+          </li>
+        {% else %}
+          <!-- Find the page for this URL part -->
+          {% assign breadcrumb_page = site.pages | where: "url", breadcrumb_url | first %}
+          
+          {% if breadcrumb_page %}
+            <li class="breadcrumb-item">
+              <a href="{{ breadcrumb_url | relative_url }}" class="breadcrumb-link">
+                {{ breadcrumb_page.title }}
+              </a>
+            </li>
+          {% else %}
+            <!-- Fallback: use formatted URL part -->
+            <li class="breadcrumb-item">
+              <a href="{{ breadcrumb_url | relative_url }}" class="breadcrumb-link">
+                {{ part | replace: '-', ' ' | capitalize }}
+              </a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+  </ol>
+</nav>
+{% endunless %}

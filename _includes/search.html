@@ -1,0 +1,154 @@
+<!-- Search Component -->
+<div class="search-container">
+  <div class="search-input-wrapper">
+    <input type="text" 
+           id="search-input" 
+           class="search-input" 
+           placeholder="Search guidelines..."
+           aria-label="Search brand guidelines">
+    <button type="button" class="search-clear" id="search-clear" aria-label="Clear search">
+      <span>×</span>
+    </button>
+  </div>
+  
+  <div id="search-results" class="search-results" aria-live="polite">
+    <!-- Results will be populated by JavaScript -->
+  </div>
+</div>
+
+<script>
+// Simple client-side search functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const searchClear = document.getElementById('search-clear');
+  
+  // Search data - this will be populated with site content
+  const searchData = [
+    {% for page in site.pages %}
+      {% unless page.url contains '/assets/' or page.url contains '/sass/' %}
+        {
+          title: "{{ page.title | escape }}",
+          url: "{{ page.url | relative_url }}",
+          content: "{{ page.content | strip_html | strip_newlines | escape }}",
+          description: "{{ page.description | escape }}",
+          section: "{{ page.section | escape }}"
+        },
+      {% endunless %}
+    {% endfor %}
+    {% for post in site.posts %}
+      {
+        title: "{{ post.title | escape }}",
+        url: "{{ post.url | relative_url }}",
+        content: "{{ post.content | strip_html | strip_newlines | escape }}",
+        description: "{{ post.description | escape }}",
+        section: "{{ post.section | escape }}"
+      },
+    {% endfor %}
+  ].filter(item => item.title && item.title !== "");
+  
+  let searchTimeout;
+  
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      performSearch(this.value.trim());
+    }, 150);
+  });
+  
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+    searchResults.style.display = 'none';
+    searchInput.focus();
+  });
+  
+  // Hide results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+  
+  function performSearch(query) {
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      searchResults.style.display = 'none';
+      return;
+    }
+    
+    const results = searchData.filter(item => {
+      const searchFields = [
+        item.title,
+        item.description,
+        item.content.substring(0, 500) // Only search first 500 chars of content
+      ].join(' ').toLowerCase();
+      
+      return searchFields.includes(query.toLowerCase());
+    }).slice(0, 8); // Limit to 8 results
+    
+    displayResults(results, query);
+  }
+  
+  function displayResults(results, query) {
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="search-no-results">No results found for "' + query + '"</div>';
+    } else {
+      searchResults.innerHTML = results.map(item => `
+        <div class="search-result-item">
+          <a href="${item.url}" class="search-result-link">
+            <div class="search-result-title">${highlightText(item.title, query)}</div>
+            ${item.description ? `<div class="search-result-description">${highlightText(item.description, query)}</div>` : ''}
+            ${item.section ? `<div class="search-result-section">${item.section}</div>` : ''}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+    searchResults.style.display = 'block';
+  }
+  
+  function highlightText(text, query) {
+    if (!text) return '';
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+  
+  // Keyboard navigation
+  searchInput.addEventListener('keydown', function(e) {
+    const resultItems = searchResults.querySelectorAll('.search-result-link');
+    let currentFocus = -1;
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      currentFocus++;
+      if (currentFocus >= resultItems.length) currentFocus = 0;
+      setActive(resultItems, currentFocus);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      currentFocus--;
+      if (currentFocus < 0) currentFocus = resultItems.length - 1;
+      setActive(resultItems, currentFocus);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const activeItem = searchResults.querySelector('.search-result-link.active');
+      if (activeItem) {
+        activeItem.click();
+      }
+    } else if (e.key === 'Escape') {
+      searchResults.style.display = 'none';
+    }
+  });
+  
+  function setActive(items, index) {
+    items.forEach((item, i) => {
+      if (i === index) {
+        item.classList.add('active');
+        item.focus();
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+});
+</script>

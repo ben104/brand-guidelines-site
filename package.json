@@ -1,0 +1,38 @@
+{
+  "name": "brand-guidelines-site",
+  "version": "1.0.0",
+  "description": "A comprehensive brand guidelines website built with Jekyll and GitHub Pages",
+  "main": "index.js",
+  "scripts": {
+    "install": "bundle install",
+    "dev": "bundle exec jekyll serve --livereload",
+    "build": "bundle exec jekyll build",
+    "clean": "bundle exec jekyll clean",
+    "test": "bundle exec jekyll build && bundle exec htmlproofer ./_site --disable-external",
+    "deploy": "git add . && git commit -m \"Deploy brand guidelines site\" && git push origin main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/brand-guidelines-site.git"
+  },
+  "keywords": [
+    "brand-guidelines",
+    "jekyll",
+    "github-pages",
+    "design-system",
+    "documentation"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/brand-guidelines-site/issues"
+  },
+  "homepage": "https://yourusername.github.io/brand-guidelines-site",
+  "devDependencies": {
+    "html-proofer": "^3.19.4"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "ruby": ">=2.7.0"
+  }
+}

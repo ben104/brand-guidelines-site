@@ -1,0 +1,111 @@
+<!-- Sidebar Navigation -->
+<aside class="sidebar-navigation" role="navigation" aria-label="Page navigation">
+  <div class="sidebar-content">
+    <!-- Search -->
+    {% include search.html %}
+    
+    <!-- Current Section Navigation -->
+    {% if page.section %}
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">
+          {% case page.section %}
+            {% when 'brand-overview' %}Brand Overview
+            {% when 'visual-identity' %}Visual Identity
+            {% when 'tone-voice' %}Tone & Voice
+            {% else %}{{ page.section | capitalize }}
+          {% endcase %}
+        </h3>
+        
+        <nav class="sidebar-nav">
+          <ul class="sidebar-nav-list">
+            {% assign section_pages = site.pages | where: "section", page.section | sort: "title" %}
+            {% for nav_page in section_pages %}
+              {% unless nav_page.url contains '/index' and nav_page.url != page.url %}
+                <li class="sidebar-nav-item">
+                  <a href="{{ nav_page.url | relative_url }}" 
+                     class="sidebar-nav-link{% if nav_page.url == page.url %} active{% endif %}">
+                    {{ nav_page.title }}
+                  </a>
+                  
+                  <!-- Show subsections if this is the current page -->
+                  {% if nav_page.url == page.url and page.sidebar_nav %}
+                    <ul class="sidebar-subnav">
+                      {% for subnav in page.sidebar_nav %}
+                        <li class="sidebar-subnav-item">
+                          <a href="#{{ subnav.id }}" class="sidebar-subnav-link">
+                            {{ subnav.title }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endunless %}
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+    
+    <!-- All Sections Overview -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-section-title">All Sections</h3>
+      <nav class="sidebar-nav">
+        <ul class="sidebar-nav-list">
+          {% for nav_item in site.data.navigation.main_navigation %}
+            {% unless nav_item.title == "Home" %}
+              <li class="sidebar-nav-item">
+                <a href="{{ nav_item.url | relative_url }}" 
+                   class="sidebar-nav-link{% if page.url contains nav_item.url and nav_item.url != '/' %} active{% endif %}">
+                  {{ nav_item.title }}
+                </a>
+                
+                {% if nav_item.children %}
+                  <ul class="sidebar-subnav">
+                    {% for child in nav_item.children %}
+                      <li class="sidebar-subnav-item">
+                        <a href="{{ child.url | relative_url }}" 
+                           class="sidebar-subnav-link{% if page.url == child.url %} active{% endif %}">
+                          {{ child.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    
+    <!-- Quick Links -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-section-title">Quick Links</h3>
+      <nav class="sidebar-nav">
+        <ul class="sidebar-nav-list">
+          <li class="sidebar-nav-item">
+            <a href="/visual-identity/colors/#color-codes" class="sidebar-nav-link">
+              Color Codes
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="/visual-identity/typography/#font-families" class="sidebar-nav-link">
+              Font Families
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="/visual-identity/logo-guidelines/#downloads" class="sidebar-nav-link">
+              Logo Downloads
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="/assets/downloads/" class="sidebar-nav-link">
+              All Downloads
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</aside>

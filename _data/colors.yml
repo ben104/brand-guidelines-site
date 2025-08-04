@@ -1,0 +1,50 @@
+# Brand Color Palette Data
+
+primary:
+  name: "Primary Blue"
+  hex: "#0066CC"
+  rgb: "0, 102, 204"
+  cmyk: "100, 50, 0, 20"
+  pantone: "286 C"
+  usage: "Main brand color for logos, headers, and primary CTAs"
+
+secondary:
+  name: "Secondary Gray"
+  hex: "#666666"
+  rgb: "102, 102, 102"
+  cmyk: "0, 0, 0, 60"
+  pantone: "Cool Gray 8 C"
+  usage: "Text, borders, and secondary elements"
+
+accent:
+  name: "Accent Orange"
+  hex: "#FF6B35"
+  rgb: "255, 107, 53"
+  cmyk: "0, 58, 79, 0"
+  pantone: "171 C"
+  usage: "Highlights, buttons, and call-to-action elements"
+
+neutrals:
+  white:
+    name: "Pure White"
+    hex: "#FFFFFF"
+    rgb: "255, 255, 255"
+    usage: "Backgrounds and negative space"
+  
+  light_gray:
+    name: "Light Gray"
+    hex: "#F5F5F5"
+    rgb: "245, 245, 245"
+    usage: "Light backgrounds and subtle dividers"
+  
+  dark_gray:
+    name: "Dark Gray"
+    hex: "#333333"
+    rgb: "51, 51, 51"
+    usage: "Body text and dark elements"
+  
+  black:
+    name: "True Black"
+    hex: "#000000"
+    rgb: "0, 0, 0"
+    usage: "High contrast text and emphasis"

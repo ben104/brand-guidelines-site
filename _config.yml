@@ -1,0 +1,46 @@
+# Jekyll configuration for Brand Guidelines Site
+title: "Brand Guidelines"
+description: "Comprehensive brand guidelines and visual identity documentation"
+baseurl: ""
+url: "https://yourusername.github.io"
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  brand_guidelines:
+    output: true
+    permalink: /:collection/:name/
+
+# Sass configuration
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"

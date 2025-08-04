@@ -1,0 +1,50 @@
+# Site Navigation Structure
+
+main_navigation:
+  - title: "Home"
+    url: "/"
+    
+  - title: "Brand Overview"
+    url: "/brand-overview/"
+    children:
+      - title: "Mission & Vision"
+        url: "/brand-overview/mission-vision/"
+      - title: "Brand Story"
+        url: "/brand-overview/brand-story/"
+        
+  - title: "Visual Identity"
+    url: "/visual-identity/"
+    children:
+      - title: "Colors"
+        url: "/visual-identity/colors/"
+      - title: "Typography"
+        url: "/visual-identity/typography/"
+      - title: "Logo Guidelines"
+        url: "/visual-identity/logo-guidelines/"
+        
+  - title: "Tone & Voice"
+    url: "/tone-voice/"
+    children:
+      - title: "Voice Characteristics"
+        url: "/tone-voice/voice-characteristics/"
+      - title: "Writing Guidelines"
+        url: "/tone-voice/writing-guidelines/"
+
+footer_navigation:
+  - title: "Quick Links"
+    links:
+      - title: "Color Palette"
+        url: "/visual-identity/colors/"
+      - title: "Logo Downloads"
+        url: "/visual-identity/logo-guidelines/"
+      - title: "Typography Guide"
+        url: "/visual-identity/typography/"
+        
+  - title: "Resources"
+    links:
+      - title: "Download Assets"
+        url: "/assets/downloads/"
+      - title: "Brand Overview"
+        url: "/brand-overview/"
+      - title: "Contact"
+        url: "/contact/"

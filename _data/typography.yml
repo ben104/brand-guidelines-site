@@ -1,0 +1,39 @@
+# Typography Specifications
+
+primary_font:
+  name: "Inter"
+  type: "Sans-serif"
+  weights: [300, 400, 500, 600, 700]
+  usage: "Headers, UI elements, and primary text"
+  web_font: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  fallback: "Arial, sans-serif"
+
+secondary_font:
+  name: "Source Serif Pro"
+  type: "Serif"
+  weights: [400, 600, 700]
+  usage: "Body text and long-form content"
+  web_font: "https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap"
+  fallback: "Georgia, serif"
+
+font_sizes:
+  h1: "2.5rem"
+  h2: "2rem"
+  h3: "1.5rem"
+  h4: "1.25rem"
+  h5: "1.125rem"
+  h6: "1rem"
+  body: "1rem"
+  small: "0.875rem"
+  caption: "0.75rem"
+
+line_heights:
+  heading: "1.2"
+  body: "1.6"
+  tight: "1.4"
+
+letter_spacing:
+  normal: "0"
+  wide: "0.025em"
+  wider: "0.05em"
+  widest: "0.1em"
