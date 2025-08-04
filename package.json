@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/brand-guidelines-site.git"
+    "url": "git+https://github.com/ben104/brand-guidelines-site.git"
   },
   "keywords": [
     "brand-guidelines",
@@ -25,9 +25,9 @@
   "author": "Your Name",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/brand-guidelines-site/issues"
+    "url": "https://github.com/ben104/brand-guidelines-site/issues"
   },
-  "homepage": "https://yourusername.github.io/brand-guidelines-site",
+  "homepage": "https://ben104.github.io/brand-guidelines-site",
   "devDependencies": {
     "html-proofer": "^3.19.4"
   },
